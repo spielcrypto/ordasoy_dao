@@ -131,30 +131,25 @@ export default function HeroSection() {
             <CardContent className="p-6 space-y-4">
               <h3 className="text-2xl font-bold flex items-center gap-2">
                 <Globe className="h-6 w-6 text-primary" />
-                Why Kazakhstan?
+                {t("hero.whyKazakhstan")}
               </h3>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex gap-3">
                   <span className="text-primary">•</span>
                   <span>
-                    <strong>Neighbor of China:</strong> Extremely cheaper import
-                    costs than Brasil, Paraguay, and Argentina
+                    <strong>{t("hero.neighborOfChina")}</strong> {t("hero.neighborOfChinaDesc")}
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-primary">•</span>
                   <span>
-                    <strong>Large Territory:</strong> Big empty extensions
-                    perfect for soybean plantations to cover China&apos;s 100M
-                    tons demand
+                    <strong>{t("hero.largeTerritory")}</strong> {t("hero.largeTerritoryDesc")}
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-primary">•</span>
                   <span>
-                    <strong>Trustworthy Relationship:</strong> Excellent
-                    diplomacy and neutral position make Kazakhstan a reliable
-                    provider
+                    <strong>{t("hero.trustworthyRelationship")}</strong> {t("hero.trustworthyRelationshipDesc")}
                   </span>
                 </li>
               </ul>
@@ -163,31 +158,27 @@ export default function HeroSection() {
 
           <Card className="border-border/50">
             <CardContent className="p-6 space-y-4">
-              <h3 className="text-2xl font-bold">Challenges & Solutions</h3>
+              <h3 className="text-2xl font-bold">{t("hero.challengesSolutions")}</h3>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold text-primary mb-2">
-                    Challenges
+                    {t("hero.challenges")}
                   </h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Climate variability and harsh winters</li>
-                    <li>• Water scarcity and drought conditions</li>
-                    <li>• Adaptation issues with soybean varieties</li>
-                    <li>• Funding for technology adoption</li>
-                    <li>• Shortage of agricultural specialists</li>
+                    <li>• {t("hero.challenge1")}</li>
+                    <li>• {t("hero.challenge2")}</li>
+                    <li>• {t("hero.challenge3")}</li>
+                    <li>• {t("hero.challenge4")}</li>
+                    <li>• {t("hero.challenge5")}</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-accent mb-2">Solutions</h4>
+                  <h4 className="font-semibold text-accent mb-2">{t("hero.solutions")}</h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Breeding programs for region-specific varieties</li>
-                    <li>
-                      • Drought-tolerant cultivars and advanced irrigation
-                    </li>
-                    <li>
-                      • Agritech from Spain (leader in agricultural technology)
-                    </li>
-                    <li>• Ordasoy DAO: Web3 funding platform</li>
+                    <li>• {t("hero.solution1")}</li>
+                    <li>• {t("hero.solution2")}</li>
+                    <li>• {t("hero.solution3")}</li>
+                    <li>• {t("hero.solution4")}</li>
                   </ul>
                 </div>
               </div>
@@ -199,33 +190,28 @@ export default function HeroSection() {
         <div className="mt-20">
           <Card className="border-border/50">
             <CardContent className="p-6 space-y-4">
-              <h3 className="text-2xl font-bold">What Ordasoy DAO Resolves</h3>
+              <h3 className="text-2xl font-bold">{t("hero.whatOrdasoyResolves")}</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold text-primary mb-2">
-                    For Founders
+                    {t("hero.forFounders")}
                   </h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Faster funding access and worldwide visibility</li>
-                    <li>• Connect with best agritech providers</li>
-                    <li>
-                      • Get funding for initial investment in northern
-                      Kazakhstan
-                    </li>
-                    <li>• Solution against KZT devaluation (using KZTE)</li>
+                    <li>• {t("hero.founder1")}</li>
+                    <li>• {t("hero.founder2")}</li>
+                    <li>• {t("hero.founder3")}</li>
+                    <li>• {t("hero.founder4")}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-accent mb-2">
-                    For Investors
+                    {t("hero.forInvestors")}
                   </h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>
-                      • Invest in profitable field with high future potential
-                    </li>
-                    <li>• Safe investment through NFT participation system</li>
-                    <li>• Mint NFTs using KZTE (Kazakhstan Tenge)</li>
-                    <li>• Receive future benefits based on NFT holdings</li>
+                    <li>• {t("hero.investor1")}</li>
+                    <li>• {t("hero.investor2")}</li>
+                    <li>• {t("hero.investor3")}</li>
+                    <li>• {t("hero.investor4")}</li>
                   </ul>
                 </div>
               </div>

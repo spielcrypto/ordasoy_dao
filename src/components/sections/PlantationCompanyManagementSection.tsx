@@ -9,8 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Bell, Search, MessageSquare } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function PlantationCompanyManagementSection() {
+  const { t } = useTranslation();
   const mockUpdates = [
     { date: "2025-01-15", title: "Q1 Harvest Report", status: "Published" },
     {
@@ -26,11 +28,10 @@ export default function PlantationCompanyManagementSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Plantation Management Portal
+            {t("company.managementPortal")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Manage your project timeline, post updates, connect with providers,
-            and communicate with investors
+            {t("company.managementDescription")}
           </p>
         </div>
 
@@ -38,19 +39,19 @@ export default function PlantationCompanyManagementSection() {
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto">
             <TabsTrigger value="timeline" className="gap-2">
               <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">Timeline</span>
+              <span className="hidden sm:inline">{t("company.timeline")}</span>
             </TabsTrigger>
             <TabsTrigger value="updates" className="gap-2">
               <Bell className="h-4 w-4" />
-              <span className="hidden sm:inline">Updates</span>
+              <span className="hidden sm:inline">{t("company.updates")}</span>
             </TabsTrigger>
             <TabsTrigger value="providers" className="gap-2">
               <Search className="h-4 w-4" />
-              <span className="hidden sm:inline">Providers</span>
+              <span className="hidden sm:inline">{t("company.providers")}</span>
             </TabsTrigger>
             <TabsTrigger value="chat" className="gap-2">
               <MessageSquare className="h-4 w-4" />
-              <span className="hidden sm:inline">Chat</span>
+              <span className="hidden sm:inline">{t("company.chat")}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -58,7 +59,7 @@ export default function PlantationCompanyManagementSection() {
           <TabsContent value="timeline" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Project Timeline & Targets</CardTitle>
+                <CardTitle>{t("company.projectTimeline")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -113,7 +114,7 @@ export default function PlantationCompanyManagementSection() {
                             <div className="grid grid-cols-2 gap-4 mt-2 text-sm">
                               <div>
                                 <span className="text-muted-foreground">
-                                  Deadline:{" "}
+                                  {t("company.deadline")}:{" "}
                                 </span>
                                 <span className="font-medium">
                                   {item.deadline}
@@ -121,7 +122,7 @@ export default function PlantationCompanyManagementSection() {
                               </div>
                               <div>
                                 <span className="text-muted-foreground">
-                                  Unlocked:{" "}
+                                  {t("company.unlocked")}:{" "}
                                 </span>
                                 <span className="font-medium text-green-500">
                                   {item.unlocked}
@@ -142,7 +143,11 @@ export default function PlantationCompanyManagementSection() {
                                   : "secondary"
                             }
                           >
-                            {item.status}
+                            {item.status === "Completed"
+                              ? t("company.completed")
+                              : item.status === "In Progress"
+                                ? t("company.inProgress")
+                                : t("company.locked")}
                           </Badge>
                         </div>
                       </div>
@@ -157,31 +162,31 @@ export default function PlantationCompanyManagementSection() {
           <TabsContent value="updates" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Post Company Update</CardTitle>
+                <CardTitle>{t("company.postUpdate")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="update-title">Update Title</Label>
+                  <Label htmlFor="update-title">{t("company.updateTitle")}</Label>
                   <Input
                     id="update-title"
-                    placeholder="e.g., Monthly Progress Report"
+                    placeholder={t("company.updatePlaceholder")}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="update-content">Content</Label>
+                  <Label htmlFor="update-content">{t("company.content")}</Label>
                   <Textarea
                     id="update-content"
-                    placeholder="Share updates with your investors..."
+                    placeholder={t("company.shareUpdates")}
                     rows={4}
                   />
                 </div>
-                <Button className="w-full">Publish Update</Button>
+                <Button className="w-full">{t("company.publishUpdate")}</Button>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Recent Updates</CardTitle>
+                <CardTitle>{t("company.recentUpdates")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -203,7 +208,9 @@ export default function PlantationCompanyManagementSection() {
                             : "secondary"
                         }
                       >
-                        {update.status}
+                        {update.status === "Published"
+                          ? t("company.published")
+                          : t("company.draft")}
                       </Badge>
                     </div>
                   ))}
@@ -218,16 +225,16 @@ export default function PlantationCompanyManagementSection() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Search className="h-5 w-5" />
-                  Find Service Providers
+                  {t("company.findProviders")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
                   <Input
-                    placeholder="Search for equipment, consultants, suppliers..."
+                    placeholder={t("company.searchProviders")}
                     className="flex-1"
                   />
-                  <Button>Search</Button>
+                  <Button>{t("common.search")}</Button>
                 </div>
                 <div className="space-y-3">
                   {[
@@ -241,7 +248,7 @@ export default function PlantationCompanyManagementSection() {
                     >
                       <h4 className="font-medium">{provider}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Verified provider • 4.8★ rating
+                        {t("company.verifiedProvider")} • 4.8★ {t("company.rating")}
                       </p>
                     </div>
                   ))}
@@ -256,7 +263,7 @@ export default function PlantationCompanyManagementSection() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MessageSquare className="h-5 w-5" />
-                  Investor Chat
+                  {t("company.investorChat")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -269,10 +276,10 @@ export default function PlantationCompanyManagementSection() {
                         </div>
                         <div className="flex-1 bg-background p-3 rounded-lg">
                           <p className="text-sm">
-                            What is the expected timeline for the first harvest?
+                            {t("companyDetail.chatMessage1")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Investor • 2 hours ago
+                            {t("companyDetail.investor")} • {t("companyDetail.twoHoursAgo")}
                           </p>
                         </div>
                       </div>
@@ -282,11 +289,10 @@ export default function PlantationCompanyManagementSection() {
                         </div>
                         <div className="flex-1 bg-primary/10 p-3 rounded-lg">
                           <p className="text-sm">
-                            We expect the first harvest in September 2025, based
-                            on our current timeline and target completion dates.
+                            {t("companyDetail.chatMessage2")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Company • 1 hour ago
+                            {t("wallet.company")} • {t("companyDetail.oneHourAgo")}
                           </p>
                         </div>
                       </div>
@@ -295,10 +301,10 @@ export default function PlantationCompanyManagementSection() {
                 </div>
                 <div className="flex gap-2">
                   <Input
-                    placeholder="Type your message..."
+                    placeholder={t("companyDetail.typeMessage")}
                     className="flex-1"
                   />
-                  <Button>Send</Button>
+                  <Button>{t("common.send")}</Button>
                 </div>
               </CardContent>
             </Card>
