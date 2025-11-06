@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useWallet } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 export default function PlantationSection() {
   const { isConnected } = useWallet();
@@ -145,7 +146,7 @@ export default function PlantationSection() {
                 </CardHeader>
                 <CardContent>
                   <img
-                    src="/assets/document-upload.dim_600x300.png"
+                    src={getAssetPath("assets/document-upload.dim_600x300.png")}
                     alt="Document Upload"
                     className="w-full rounded-lg"
                   />

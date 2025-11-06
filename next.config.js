@@ -15,6 +15,9 @@ const nextConfig = {
     unoptimized: true
   },
   trailingSlash: true,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 module.exports = nextConfig;

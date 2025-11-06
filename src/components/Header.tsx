@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import WalletConnection from "./WalletConnection";
 import LanguageSelector from "./LanguageSelector";
 import { useWallet } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ export default function Header() {
             className="flex items-center gap-3 transition-opacity hover:opacity-80"
           >
             <img
-              src="/assets/ordasoy_logo.png"
+              src={getAssetPath("assets/ordasoy_logo.png")}
               alt="Ordasoy DAO"
               className="h-10 w-10"
             />

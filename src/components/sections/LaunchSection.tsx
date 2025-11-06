@@ -12,6 +12,7 @@ import { Rocket, Clock, CheckCircle, XCircle, Coins } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useWallet } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 export default function LaunchSection() {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ export default function LaunchSection() {
     {
       id: 1,
       name: "Northern Kazakhstan Soybean Plantation",
-      image: "/assets/soybean-field-launch.dim_600x400.png",
+      image: getAssetPath("assets/soybean-field-launch.dim_600x400.png"),
       description:
         "Soybean plantation in Northern Kazakhstan region. Targets: Buy ground, seeds, irrigation systems, and first harvest.",
       price: 10000,
@@ -49,7 +50,7 @@ export default function LaunchSection() {
     {
       id: 2,
       name: "Southeast Kazakhstan Soybean Farm",
-      image: "/assets/soybean-harvest-launch.dim_600x400.png",
+      image: getAssetPath("assets/soybean-harvest-launch.dim_600x400.png"),
       description:
         "Soybean farm expansion in Southeast Kazakhstan. Focus on drought-tolerant varieties.",
       price: 12000,

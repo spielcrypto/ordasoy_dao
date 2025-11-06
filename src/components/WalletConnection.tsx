@@ -14,6 +14,7 @@ import { Wallet, Check, Copy, Building2, Users } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useWallet, UserRole } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 interface WalletConnectionProps {
   open: boolean;
@@ -138,7 +139,7 @@ export default function WalletConnection({
 
             <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50">
               <img
-                src="/assets/phantom.png"
+                src={getAssetPath("assets/phantom.png")}
                 alt={t("wallet.phantomWallet")}
                 className="h-12 w-12 rounded-lg object-cover"
               />

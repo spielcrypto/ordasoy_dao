@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, Target } from "lucide-react";
 import { toast } from "sonner";
 import { useWallet } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 export default function PlantationCompanyDocsSection() {
   const {
@@ -112,7 +113,7 @@ export default function PlantationCompanyDocsSection() {
             </CardHeader>
             <CardContent>
               <img
-                src="/assets/document-upload.dim_600x300.png"
+                src={getAssetPath("assets/document-upload.dim_600x300.png")}
                 alt="Document Upload"
                 className="w-full rounded-lg"
               />

@@ -18,6 +18,7 @@ import {
   Clock,
   Lock,
 } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 interface CompanyDetailPageProps {
   companyId: string;
@@ -38,7 +39,7 @@ export default function CompanyDetailPage({
     name: companyName,
     description:
       "Soybean plantation in Northern Kazakhstan region. Focus on sustainable agriculture and high-yield varieties.",
-    image: "/assets/soybean-field-launch.dim_600x400.png",
+    image: getAssetPath("assets/soybean-field-launch.dim_600x400.png"),
     investorNfts: 15,
     totalNfts: 1000,
     status: "Active",

@@ -33,8 +33,6 @@ jobs:
 
       - name: Build
         run: |
-          echo "Building for GitHub Pages..."
-          echo "Repository: ${{ github.repository }}"
           pnpm run build
         env:
           NODE_ENV: production

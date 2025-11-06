@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useWallet } from "@/hooks/useWallet";
+import { getAssetPath } from "@/lib/utils";
 
 export default function HeroSection() {
   const { t } = useTranslation();
@@ -115,7 +116,7 @@ export default function HeroSection() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/assets/soybean.png"
+                src={getAssetPath("assets/soybean.png")}
                 alt="Kazakhstan Soybean Plantation"
                 className="w-full h-auto"
               />
