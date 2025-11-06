@@ -32,9 +32,14 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build
-        run: pnpm run build
+        run: |
+          echo "Building for GitHub Pages..."
+          echo "Repository: ${{ github.repository }}"
+          pnpm run build
         env:
           NODE_ENV: production
+          GITHUB_PAGES: 'true'
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
