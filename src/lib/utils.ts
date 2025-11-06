@@ -11,76 +11,95 @@ export function cn(...inputs: ClassValue[]) {
  * - GitHub Pages with subdirectory: /repo-name/assets/...
  * - Custom domain (root): /assets/...
  *
- * This function detects the basePath from Next.js script tags in real-time,
- * which ensures it works correctly regardless of how the build was configured.
+ * This function detects the basePath from loaded script tags.
+ * Defaults to root (no basePath) for custom domains.
  */
 export function getAssetPath(path: string): string {
   // Remove leading slash if present
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
 
+  // Default to empty basePath (root deployment - custom domain)
+  // Only add basePath if we detect one from the page
   let basePath = "";
 
   if (typeof window !== "undefined") {
-    // Client-side: detect basePath from Next.js script tags (most reliable)
-    // Next.js always includes scripts with /_next/static/ in the path
-    // This detection works at runtime, so it's independent of build configuration
-    const scripts = document.getElementsByTagName("script");
+    // Cache the detected basePath to avoid recalculating
+    const cacheKey = "__ordasoy_basePath__";
+    const cached = (window as any)[cacheKey];
 
-    for (let i = 0; i < scripts.length; i++) {
-      const src = scripts[i].src;
-      if (src && src.includes("/_next/static/")) {
-        try {
-          // Parse the script URL to get the pathname
-          // Use window.location.origin as base for relative URLs
-          const url = new URL(src, window.location.origin);
-          const pathname = url.pathname;
+    if (cached !== undefined) {
+      basePath = cached;
+    } else {
+      // Detect basePath from script tags that are already in the DOM
+      // Look for scripts with /_next/static/ in their src
+      const scripts = document.querySelectorAll(
+        'script[src*="/_next/static/"]'
+      );
 
-          // Find the position of /_next/static/ in the pathname
-          const nextStaticIndex = pathname.indexOf("/_next/static/");
+      for (let i = 0; i < scripts.length; i++) {
+        const script = scripts[i] as HTMLScriptElement;
+        const src = script.src || script.getAttribute("src");
 
-          if (nextStaticIndex > 0) {
-            // Extract everything before /_next/static/ as the basePath
-            // Example: /repo-name/_next/static/... -> basePath = "/repo-name"
-            basePath = pathname.substring(0, nextStaticIndex);
-            break;
-          } else if (nextStaticIndex === 0) {
-            // Script is at /_next/static/... (root deployment, no basePath)
-            // Example: /_next/static/... -> basePath = ""
-            basePath = "";
-            break;
-          }
-        } catch (e) {
-          // If URL parsing fails (shouldn't happen, but handle gracefully),
-          // try relative path detection
-          if (src.startsWith("/")) {
-            const nextStaticIndex = src.indexOf("/_next/static/");
+        if (src) {
+          try {
+            // Parse the URL to get the pathname
+            let url: URL;
+            if (src.startsWith("http://") || src.startsWith("https://")) {
+              url = new URL(src);
+            } else if (src.startsWith("//")) {
+              url = new URL(
+                src,
+                window.location.protocol + "//" + window.location.host
+              );
+            } else if (src.startsWith("/")) {
+              url = new URL(src, window.location.origin);
+            } else {
+              // Relative URL
+              url = new URL(src, window.location.href);
+            }
+
+            const pathname = url.pathname;
+            const nextStaticIndex = pathname.indexOf("/_next/static/");
+
             if (nextStaticIndex > 0) {
-              basePath = src.substring(0, nextStaticIndex);
+              // Found a basePath: everything before /_next/static/
+              basePath = pathname.substring(0, nextStaticIndex);
               break;
             } else if (nextStaticIndex === 0) {
+              // No basePath, we're at root
               basePath = "";
               break;
+            }
+          } catch (e) {
+            // If parsing fails, try simple string search
+            const nextStaticIndex = src.indexOf("/_next/static/");
+            if (nextStaticIndex === 0) {
+              basePath = "";
+              break;
+            } else if (nextStaticIndex > 0) {
+              // Extract basePath from string
+              const beforeNext = src.substring(0, nextStaticIndex);
+              // Remove protocol and domain if present
+              const pathMatch = beforeNext.match(/\/([^/]+)$/);
+              if (pathMatch) {
+                basePath = pathMatch[0];
+                break;
+              }
             }
           }
         }
       }
-    }
 
-    // Ensure basePath is always a string (never undefined or null)
-    // Default to empty string for root deployments (custom domains)
-    if (basePath === undefined || basePath === null) {
-      basePath = "";
+      // Cache the result
+      (window as any)[cacheKey] = basePath;
     }
   } else {
-    // Server-side: use environment variable if available
-    // For static exports, this is only used during build/SSR
+    // Server-side: use environment variable
     basePath =
       (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_PATH) ||
       "";
   }
 
   // Return path with basePath prefix
-  // If basePath is empty (root deployment like custom domain), return /assets/...
-  // If basePath exists (subdirectory like GitHub Pages), return /repo-name/assets/...
   return basePath ? `${basePath}/${cleanPath}` : `/${cleanPath}`;
 }
