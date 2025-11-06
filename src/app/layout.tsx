@@ -1,0 +1,36 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
+import I18nProvider from "./i18n-provider";
+import { Toaster } from "@/components/ui/sonner";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Ordasoy DAO - Frontend Prototype",
+  description:
+    "A decentralized platform connecting plantation companies with investors through NFT-based investment opportunities",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <I18nProvider>
+          <QueryProvider>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </QueryProvider>
+        </I18nProvider>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,47 @@
+% Header for better page break control
+% Prevents orphaned titles and single lines at page breaks
+
+% Prevent widows and orphans (single lines at top/bottom of page)
+% High penalty prevents breaking in these cases
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+% Increase penalty for breaking after headings and paragraphs
+% This helps prevent orphaned titles
+\makeatletter
+\@beginparpenalty=10000
+\@endparpenalty=10000
+% Prevent breaking immediately after section headings
+\def\@afterheading{%
+  \@nobreaktrue
+  \everypar{%
+    \if@nobreak
+      \@nobreakfalse
+      \clubpenalty \@M
+      \if@afterindent \else
+        {\setbox\z@\lastbox}%
+      \fi
+    \else
+      \clubpenalty \@clubpenalty
+      \everypar{}%
+    \fi}%
+}
+\makeatother
+
+% Better handling of paragraph breaks
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% Allow more flexible page breaking while preventing orphans
+\raggedbottom
+
+% Try to use titlesec package for better heading control
+% This provides more control over section formatting and page breaks
+\IfFileExists{titlesec.sty}{
+    \usepackage{titlesec}
+    % Ensure headings stay with at least some content
+    \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+}{}

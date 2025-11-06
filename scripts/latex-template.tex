@@ -1,0 +1,83 @@
+% LaTeX template for Ordasoy DAO documentation with Cyrillic support
+\documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$,$if(lang)$$lang$$else$english$endif$]{article}
+
+% Use polyglossia for multi-language support (requires XeLaTeX)
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+% Set up Cyrillic languages
+\setotherlanguage{russian}
+\setotherlanguage{kazakh}
+
+% Font configuration for Cyrillic support
+% Try to use DejaVu fonts if available, otherwise use system defaults
+\usepackage{fontspec}
+
+% Set main font - try DejaVu Serif, fall back to Liberation Serif, then system default
+\IfFontExistsTF{DejaVu Serif}{
+    \setmainfont{DejaVu Serif}
+    \setsansfont{DejaVu Sans}
+    \setmonofont{DejaVu Sans Mono}
+}{
+    \IfFontExistsTF{Liberation Serif}{
+        \setmainfont{Liberation Serif}
+        \setsansfont{Liberation Sans}
+        \setmonofont{Liberation Mono}
+    }{
+        % Use system default - XeLaTeX will choose an appropriate font
+        % This should work on most systems
+    }
+}
+
+% Geometry
+\usepackage[$if(geometry)$$geometry$$else$margin=1in$endif$]{geometry}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=$if(linkcolor)$$linkcolor$$else$blue$endif$,
+    urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+    citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+    $if(toccolor)$toccolor=$toccolor$,$endif$
+}
+
+% Table of contents
+$if(toc)$
+\usepackage{tocloft}
+$endif$
+
+% Line spacing
+\usepackage{setspace}
+\setstretch{$if(linestretch)$$linestretch$$else$1.2$endif$}
+
+% Code highlighting
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% Title
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$author$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$if(toc)$
+\tableofcontents
+\newpage
+$endif$
+
+$body$
+
+\end{document}
+

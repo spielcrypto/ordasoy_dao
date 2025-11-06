@@ -1,0 +1,22 @@
+% Header for Cyrillic support in LaTeX documents
+% This ensures proper font setup for Russian and Kazakh text
+
+% Ensure fontspec is loaded (should be automatic with XeLaTeX)
+% Force use of fonts that support Cyrillic characters
+\defaultfontfeatures{Ligatures=TeX}
+
+% If mainfont wasn't set or doesn't support Cyrillic, try to set a fallback
+% This helps when some parts of the document use default fonts
+\IfFontExistsTF{DejaVu Serif}{
+  % Ensure DejaVu is used as fallback for any missing characters
+  \newfontfamily\cyrillicfont{DejaVu Serif}
+  \newfontfamily\cyrillicfontsf{DejaVu Sans}
+  \newfontfamily\cyrillicfonttt{DejaVu Sans Mono}
+}{
+  \IfFontExistsTF{Liberation Serif}{
+    \newfontfamily\cyrillicfont{Liberation Serif}
+    \newfontfamily\cyrillicfontsf{Liberation Sans}
+    \newfontfamily\cyrillicfonttt{Liberation Mono}
+  }{}
+}
+
