@@ -62,11 +62,10 @@ export default function PlantationSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Plantation Company Portal
+            {t("company.portal")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Launch your NFT fundraising campaign, manage documentation, and
-            engage with your investor community
+            {t("company.launchCampaignDescription")}
           </p>
         </div>
 
@@ -74,27 +73,33 @@ export default function PlantationSection() {
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 h-auto">
             <TabsTrigger value="documents" className="gap-2">
               <Upload className="h-4 w-4" />
-              <span className="hidden sm:inline">Documents</span>
+              <span className="hidden sm:inline">
+                {t("company.uploadDocuments")}
+              </span>
             </TabsTrigger>
             <TabsTrigger value="targets" className="gap-2">
               <Target className="h-4 w-4" />
-              <span className="hidden sm:inline">Launch Targets</span>
+              <span className="hidden sm:inline">
+                {t("company.setLaunchTargets")}
+              </span>
             </TabsTrigger>
             <TabsTrigger value="timeline" className="gap-2">
               <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">Timeline</span>
+              <span className="hidden sm:inline">{t("company.timeline")}</span>
             </TabsTrigger>
             <TabsTrigger value="voting" className="gap-2">
               <Vote className="h-4 w-4" />
-              <span className="hidden sm:inline">DAO Voting</span>
+              <span className="hidden sm:inline">
+                {t("companyDetail.daoVoting")}
+              </span>
             </TabsTrigger>
             <TabsTrigger value="updates" className="gap-2">
               <Bell className="h-4 w-4" />
-              <span className="hidden sm:inline">Updates</span>
+              <span className="hidden sm:inline">{t("company.updates")}</span>
             </TabsTrigger>
             <TabsTrigger value="providers" className="gap-2">
               <Search className="h-4 w-4" />
-              <span className="hidden sm:inline">Providers</span>
+              <span className="hidden sm:inline">{t("company.providers")}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -105,26 +110,28 @@ export default function PlantationSection() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Upload className="h-5 w-5" />
-                    Upload Documents
+                    {t("company.uploadDocuments")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="doc-type">Document Type</Label>
+                    <Label htmlFor="doc-type">
+                      {t("company.documentType")}
+                    </Label>
                     <Input
                       id="doc-type"
                       placeholder="e.g., Business Plan, Financial Report"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="doc-file">File Upload</Label>
+                    <Label htmlFor="doc-file">{t("company.fileUpload")}</Label>
                     <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer">
                       <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                       <p className="text-sm text-muted-foreground">
-                        Click to upload or drag and drop
+                        {t("company.clickToUpload")}
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">
-                        PDF, DOC, DOCX up to 10MB
+                        {t("company.fileTypes")}
                       </p>
                     </div>
                   </div>
@@ -132,39 +139,41 @@ export default function PlantationSection() {
                     <div className="space-y-2">
                       <Progress value={uploadProgress} />
                       <p className="text-sm text-muted-foreground text-center">
-                        Uploading... {uploadProgress}%
+                        {t("company.uploading")} {uploadProgress}%
                       </p>
                     </div>
                   )}
                   <Button onClick={handleDocumentUpload} className="w-full">
-                    Submit Document
+                    {t("company.submitDocument")}
                   </Button>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Document Preview</CardTitle>
+                  <CardTitle>{t("company.documentPreview")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <img
                     src={getAssetPath("assets/document-upload.dim_600x300.png")}
-                    alt="Document Upload"
+                    alt={t("company.documentPreview")}
                     className="w-full rounded-lg"
                   />
                   <div className="mt-4 space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">
-                        Uploaded Documents
+                        {t("company.uploadedDocuments")}
                       </span>
-                      <span className="font-medium">12 files</span>
+                      <span className="font-medium">
+                        12 {t("common.files")}
+                      </span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">
-                        Verification Status
+                        {t("company.verificationStatus")}
                       </span>
                       <Badge variant="outline" className="text-green-500">
-                        Verified
+                        {t("company.verified")}
                       </Badge>
                     </div>
                   </div>
@@ -177,12 +186,14 @@ export default function PlantationSection() {
           <TabsContent value="targets" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Set NFT Launch Targets</CardTitle>
+                <CardTitle>{t("company.setLaunchTargets")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="target-amount">Funding Target (KZTE)</Label>
+                    <Label htmlFor="target-amount">
+                      {t("company.fundingTarget")}
+                    </Label>
                     <Input
                       id="target-amount"
                       type="number"
@@ -190,27 +201,35 @@ export default function PlantationSection() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="nft-supply">Total NFT Supply</Label>
+                    <Label htmlFor="nft-supply">
+                      {t("company.totalNFTSupply")}
+                    </Label>
                     <Input id="nft-supply" type="number" placeholder="1000" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="nft-price">NFT Price (KZTE)</Label>
+                    <Label htmlFor="nft-price">{t("company.nftPrice")}</Label>
                     <Input id="nft-price" type="number" placeholder="10000" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="launch-date">Launch Date</Label>
+                    <Label htmlFor="launch-date">
+                      {t("company.launchDate")}
+                    </Label>
                     <Input id="launch-date" type="date" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-desc">Project Description</Label>
+                  <Label htmlFor="project-desc">
+                    {t("company.projectDescription")}
+                  </Label>
                   <Textarea
                     id="project-desc"
-                    placeholder="Describe your plantation project, goals, and expected returns..."
+                    placeholder={t("company.describeProject")}
                     rows={4}
                   />
                 </div>
-                <Button className="w-full">Configure Launch</Button>
+                <Button className="w-full">
+                  {t("company.configureLaunch")}
+                </Button>
               </CardContent>
             </Card>
           </TabsContent>
@@ -219,13 +238,13 @@ export default function PlantationSection() {
           <TabsContent value="timeline" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Project Timeline & Targets</CardTitle>
+                <CardTitle>{t("company.projectTimeline")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   {[
                     {
-                      phase: "Target 1: Buy Ground for Plantation",
+                      phase: t("company.target1"),
                       date: "Jan 15, 2025",
                       deadline: "Feb 15, 2025",
                       status: "Completed",
@@ -233,7 +252,7 @@ export default function PlantationSection() {
                       total: "500,000 KZTE",
                     },
                     {
-                      phase: "Target 2: Buy Seeds and Technologies",
+                      phase: t("company.target2"),
                       date: "Feb 16, 2025",
                       deadline: "Mar 16, 2025",
                       status: "In Progress",
@@ -241,7 +260,7 @@ export default function PlantationSection() {
                       total: "800,000 KZTE",
                     },
                     {
-                      phase: "Target 3: Install Irrigation Systems",
+                      phase: t("company.target3"),
                       date: "Mar 17, 2025",
                       deadline: "Apr 17, 2025",
                       status: "Locked",
@@ -249,7 +268,7 @@ export default function PlantationSection() {
                       total: "1,200,000 KZTE",
                     },
                     {
-                      phase: "Target 4: First Harvest",
+                      phase: t("company.target4"),
                       date: "Jun 2025",
                       deadline: "Sep 2025",
                       status: "Locked",
@@ -274,7 +293,7 @@ export default function PlantationSection() {
                             <div className="grid grid-cols-2 gap-4 mt-2 text-sm">
                               <div>
                                 <span className="text-muted-foreground">
-                                  Deadline:{" "}
+                                  {t("company.deadline")}:{" "}
                                 </span>
                                 <span className="font-medium">
                                   {item.deadline}
@@ -282,7 +301,7 @@ export default function PlantationSection() {
                               </div>
                               <div>
                                 <span className="text-muted-foreground">
-                                  Unlocked:{" "}
+                                  {t("company.unlocked")}:{" "}
                                 </span>
                                 <span className="font-medium text-green-500">
                                   {item.unlocked}
@@ -303,7 +322,11 @@ export default function PlantationSection() {
                                   : "secondary"
                             }
                           >
-                            {item.status}
+                            {item.status === "Completed"
+                              ? t("company.completed")
+                              : item.status === "In Progress"
+                                ? t("company.inProgress")
+                                : t("company.locked")}
                           </Badge>
                         </div>
                       </div>
@@ -319,37 +342,43 @@ export default function PlantationSection() {
             <div className="grid gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Target Deadline Extension Vote</CardTitle>
+                  <CardTitle>
+                    {t("companyDetail.targetDeadlineExtension")}
+                  </CardTitle>
                   <p className="text-sm text-muted-foreground">
-                    Target 2 deadline has been reached. NFT holders must vote to
-                    extend deadline or recover investment.
+                    {t("companyDetail.deadlineReached")}
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="p-4 bg-muted/50 rounded-lg">
                     <h4 className="font-semibold mb-2">
-                      Target: Buy Seeds and Technologies
+                      {t("companyDetail.target")}: {t("company.target2")}
                     </h4>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Deadline: Mar 16, 2025 (Reached)
+                      {t("company.deadline")}: Mar 16, 2025 (
+                      {t("companyDetail.reached")})
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Unlocked Funds: 300,000 KZTE / 800,000 KZTE
+                      {t("company.unlockedFunds")}: 300,000 KZTE / 800,000 KZTE
                     </p>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Votes</span>
-                      <span className="font-medium">847 / 1200 votes</span>
+                      <span className="text-muted-foreground">
+                        {t("companyDetail.votes")}
+                      </span>
+                      <span className="font-medium">
+                        847 / 1200 {t("companyDetail.votes").toLowerCase()}
+                      </span>
                     </div>
                     <Progress value={(847 / 1200) * 100} className="mb-4" />
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="flex-1">
-                      Extend Deadline (+30 days)
+                      {t("companyDetail.extendDeadline")}
                     </Button>
                     <Button size="sm" variant="outline" className="flex-1">
-                      Recover Investment
+                      {t("company.recoverInvestment")}
                     </Button>
                   </div>
                 </CardContent>
@@ -360,29 +389,29 @@ export default function PlantationSection() {
             <Card className="border-destructive/50">
               <CardHeader>
                 <CardTitle className="text-destructive">
-                  Recover Investment
+                  {t("company.recoverInvestment")}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  If the recovery vote passed, you can burn your NFTs to recover
-                  a percentage of the investment based on locked funds
-                  remaining.
+                  {t("company.recoveryVotePassed")}
                 </p>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 bg-muted/50 rounded-lg space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Your NFTs:</span>
+                    <span className="text-muted-foreground">
+                      {t("company.yourNFTs")}:
+                    </span>
                     <span className="font-medium">15 NFTs</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      Locked Funds Remaining:
+                      {t("companyDetail.lockedFundsRemaining")}:
                     </span>
                     <span className="font-medium">500,000 KZTE</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      Recovery Amount:
+                      {t("company.recoveryAmount")}:
                     </span>
                     <span className="font-medium text-green-500">
                       ~83.3% of NFT price
@@ -390,7 +419,7 @@ export default function PlantationSection() {
                   </div>
                 </div>
                 <Button variant="destructive" className="w-full">
-                  Burn NFTs & Recover Investment
+                  {t("company.burnNFTsRecover")}
                 </Button>
               </CardContent>
             </Card>
@@ -400,31 +429,33 @@ export default function PlantationSection() {
           <TabsContent value="updates" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Post Company Update</CardTitle>
+                <CardTitle>{t("company.postUpdate")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="update-title">Update Title</Label>
+                  <Label htmlFor="update-title">
+                    {t("company.updateTitle")}
+                  </Label>
                   <Input
                     id="update-title"
-                    placeholder="e.g., Monthly Progress Report"
+                    placeholder={t("company.updatePlaceholder")}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="update-content">Content</Label>
+                  <Label htmlFor="update-content">{t("company.content")}</Label>
                   <Textarea
                     id="update-content"
-                    placeholder="Share updates with your investors..."
+                    placeholder={t("company.shareUpdates")}
                     rows={4}
                   />
                 </div>
-                <Button className="w-full">Publish Update</Button>
+                <Button className="w-full">{t("company.publishUpdate")}</Button>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Recent Updates</CardTitle>
+                <CardTitle>{t("company.recentUpdates")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -446,7 +477,9 @@ export default function PlantationSection() {
                             : "secondary"
                         }
                       >
-                        {update.status}
+                        {update.status === "Published"
+                          ? t("company.published")
+                          : t("company.draft")}
                       </Badge>
                     </div>
                   ))}
@@ -461,16 +494,16 @@ export default function PlantationSection() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Search className="h-5 w-5" />
-                  Find Service Providers
+                  {t("company.findProviders")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
                   <Input
-                    placeholder="Search for equipment, consultants, suppliers..."
+                    placeholder={t("company.searchProviders")}
                     className="flex-1"
                   />
-                  <Button>Search</Button>
+                  <Button>{t("common.search")}</Button>
                 </div>
                 <div className="space-y-3">
                   {[
@@ -484,7 +517,8 @@ export default function PlantationSection() {
                     >
                       <h4 className="font-medium">{provider}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Verified provider • 4.8★ rating
+                        {t("company.verifiedProvider")} • 4.8★{" "}
+                        {t("company.rating")}
                       </p>
                     </div>
                   ))}
@@ -496,12 +530,12 @@ export default function PlantationSection() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MessageSquare className="h-5 w-5" />
-                  Investor Chat
+                  {t("company.investorChat")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <Button className="w-full" variant="outline">
-                  Open Chat Room
+                  {t("company.openChatRoom")}
                 </Button>
               </CardContent>
             </Card>

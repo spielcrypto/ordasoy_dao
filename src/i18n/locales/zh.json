@@ -192,7 +192,22 @@
     "openChatRoom": "打开聊天室",
     "uploading": "上传中",
     "documentsUploadedSuccess": "文件上传成功",
-    "launchTargetsConfiguredSuccess": "启动目标配置成功"
+    "launchTargetsConfiguredSuccess": "启动目标配置成功",
+    "launchCampaignDescription": "启动您的NFT筹款活动，管理文档并与投资者社区互动",
+    "target1": "目标1：购买种植园土地",
+    "target2": "目标2：购买种子和技术",
+    "target3": "目标3：安装灌溉系统",
+    "target4": "目标4：首次收获",
+    "unlockedFunds": "已解锁资金",
+    "votes": "投票",
+    "recoverInvestment": "收回投资",
+    "yourNFTs": "您的NFT",
+    "recoveryAmount": "收回金额",
+    "burnNFTsRecover": "销毁NFT并收回投资",
+    "recoveryVotePassed": "如果收回投票通过，您可以销毁您的NFT，根据剩余的锁定资金收回一定比例的投资。",
+    "buyGround": "购买土地",
+    "buySeedsTech": "购买种子和技术",
+    "irrigationSystems": "灌溉系统"
   },
   "companyDetail": {
     "backToPortfolio": "返回投资组合",

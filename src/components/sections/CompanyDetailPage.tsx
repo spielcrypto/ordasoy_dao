@@ -47,7 +47,7 @@ export default function CompanyDetailPage({
     targets: [
       {
         id: 1,
-        name: "Buy Ground for Plantation",
+        name: t("company.target1"),
         date: "Jan 15, 2025",
         deadline: "Feb 15, 2025",
         status: "Completed",
@@ -56,7 +56,7 @@ export default function CompanyDetailPage({
       },
       {
         id: 2,
-        name: "Buy Seeds and Technologies",
+        name: t("company.target2"),
         date: "Feb 16, 2025",
         deadline: "Mar 16, 2025",
         status: "In Progress",
@@ -65,7 +65,7 @@ export default function CompanyDetailPage({
       },
       {
         id: 3,
-        name: "Install Irrigation Systems",
+        name: t("company.target3"),
         date: "Mar 17, 2025",
         deadline: "Apr 17, 2025",
         status: "Locked",
@@ -74,7 +74,7 @@ export default function CompanyDetailPage({
       },
       {
         id: 4,
-        name: "First Harvest",
+        name: t("company.target4"),
         date: "Jun 2025",
         deadline: "Sep 2025",
         status: "Locked",
@@ -84,10 +84,9 @@ export default function CompanyDetailPage({
     ],
     activeVote: {
       id: 1,
-      title: "Target Deadline Extension Vote",
-      description:
-        "Target 2 deadline has been reached. NFT holders must vote to extend deadline or recover investment.",
-      target: "Buy Seeds and Technologies",
+      title: t("companyDetail.targetDeadlineExtension"),
+      description: t("companyDetail.deadlineReached"),
+      target: t("company.target2"),
       deadline: "Mar 16, 2025",
       votes: 847,
       totalVotes: 1200,

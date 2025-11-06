@@ -192,7 +192,22 @@
     "openChatRoom": "Open Chat Room",
     "uploading": "Uploading",
     "documentsUploadedSuccess": "Documents uploaded successfully",
-    "launchTargetsConfiguredSuccess": "Launch targets configured successfully"
+    "launchTargetsConfiguredSuccess": "Launch targets configured successfully",
+    "launchCampaignDescription": "Launch your NFT fundraising campaign, manage documentation, and engage with your investor community",
+    "target1": "Target 1: Buy Ground for Plantation",
+    "target2": "Target 2: Buy Seeds and Technologies",
+    "target3": "Target 3: Install Irrigation Systems",
+    "target4": "Target 4: First Harvest",
+    "unlockedFunds": "Unlocked Funds",
+    "votes": "Votes",
+    "recoverInvestment": "Recover Investment",
+    "yourNFTs": "Your NFTs",
+    "recoveryAmount": "Recovery Amount",
+    "burnNFTsRecover": "Burn NFTs & Recover Investment",
+    "recoveryVotePassed": "If the recovery vote passed, you can burn your NFTs to recover a percentage of the investment based on locked funds remaining.",
+    "buyGround": "Buy Ground",
+    "buySeedsTech": "Buy Seeds & Tech",
+    "irrigationSystems": "Irrigation Systems"
   },
   "companyDetail": {
     "backToPortfolio": "Back to Portfolio",

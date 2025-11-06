@@ -34,14 +34,14 @@ export default function LaunchSection() {
       endsIn: "5 days",
       status: "Active",
       targets: [
-        { name: "Buy Ground", amount: "5,000,000 KZTE", status: "Locked" },
+        { name: t("company.buyGround"), amount: "5,000,000 KZTE", status: "Locked" },
         {
-          name: "Buy Seeds & Tech",
+          name: t("company.buySeedsTech"),
           amount: "3,000,000 KZTE",
           status: "Locked",
         },
         {
-          name: "Irrigation Systems",
+          name: t("company.irrigationSystems"),
           amount: "2,000,000 KZTE",
           status: "Locked",
         },
@@ -61,14 +61,14 @@ export default function LaunchSection() {
       endsIn: "12 days",
       status: "Active",
       targets: [
-        { name: "Buy Ground", amount: "4,500,000 KZTE", status: "Locked" },
+        { name: t("company.buyGround"), amount: "4,500,000 KZTE", status: "Locked" },
         {
-          name: "Buy Seeds & Tech",
+          name: t("company.buySeedsTech"),
           amount: "3,000,000 KZTE",
           status: "Locked",
         },
         {
-          name: "Irrigation Systems",
+          name: t("company.irrigationSystems"),
           amount: "1,500,000 KZTE",
           status: "Locked",
         },

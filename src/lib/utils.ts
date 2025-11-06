@@ -6,11 +6,13 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Get the correct asset path for GitHub Pages
- * Handles basePath automatically for static exports
+ * Get the correct asset path for static exports
+ * Handles basePath automatically for different deployment scenarios:
+ * - GitHub Pages with subdirectory: /repo-name/assets/...
+ * - Custom domain (root): /assets/...
  *
- * This function detects the basePath from the script src or current URL,
- * ensuring it works in all deployment scenarios
+ * This function detects the basePath from Next.js script tags in real-time,
+ * which ensures it works correctly regardless of how the build was configured.
  */
 export function getAssetPath(path: string): string {
   // Remove leading slash if present
@@ -18,70 +20,67 @@ export function getAssetPath(path: string): string {
 
   let basePath = "";
 
-  // Try to get basePath from environment variable first (set at build time)
-  if (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_PATH) {
-    basePath = process.env.NEXT_PUBLIC_BASE_PATH;
-  } else if (typeof window !== "undefined") {
-    // Client-side: detect basePath from script tags or current URL
-    // Method 1: Try to get from script src (most reliable for Next.js)
+  if (typeof window !== "undefined") {
+    // Client-side: detect basePath from Next.js script tags (most reliable)
+    // Next.js always includes scripts with /_next/static/ in the path
+    // This detection works at runtime, so it's independent of build configuration
     const scripts = document.getElementsByTagName("script");
+
     for (let i = 0; i < scripts.length; i++) {
       const src = scripts[i].src;
       if (src && src.includes("/_next/static/")) {
-        // Extract basePath from script src
-        // Script src can be:
-        // - Absolute: https://domain.com/repo-name/_next/static/...
-        // - Relative: /repo-name/_next/static/... or /_next/static/...
-        let scriptPath = src;
-        // If absolute URL, extract pathname
         try {
-          const url = new URL(src);
-          scriptPath = url.pathname;
-        } catch {
-          // If relative URL, use as is
-          scriptPath = src.startsWith("/") ? src : `/${src}`;
-        }
+          // Parse the script URL to get the pathname
+          // Use window.location.origin as base for relative URLs
+          const url = new URL(src, window.location.origin);
+          const pathname = url.pathname;
 
-        // Extract basePath: everything before /_next/static/
-        const nextStaticIndex = scriptPath.indexOf("/_next/static/");
-        if (nextStaticIndex > 0) {
-          basePath = scriptPath.substring(0, nextStaticIndex);
-          break;
-        } else if (nextStaticIndex === 0) {
-          // No basePath, we're at root
-          basePath = "";
-          break;
+          // Find the position of /_next/static/ in the pathname
+          const nextStaticIndex = pathname.indexOf("/_next/static/");
+
+          if (nextStaticIndex > 0) {
+            // Extract everything before /_next/static/ as the basePath
+            // Example: /repo-name/_next/static/... -> basePath = "/repo-name"
+            basePath = pathname.substring(0, nextStaticIndex);
+            break;
+          } else if (nextStaticIndex === 0) {
+            // Script is at /_next/static/... (root deployment, no basePath)
+            // Example: /_next/static/... -> basePath = ""
+            basePath = "";
+            break;
+          }
+        } catch (e) {
+          // If URL parsing fails (shouldn't happen, but handle gracefully),
+          // try relative path detection
+          if (src.startsWith("/")) {
+            const nextStaticIndex = src.indexOf("/_next/static/");
+            if (nextStaticIndex > 0) {
+              basePath = src.substring(0, nextStaticIndex);
+              break;
+            } else if (nextStaticIndex === 0) {
+              basePath = "";
+              break;
+            }
+          }
         }
       }
     }
 
-    // Method 2: Fallback to detecting from current URL
-    if (!basePath) {
-      const pathname = window.location.pathname;
-      const segments = pathname.split("/").filter(Boolean);
-      // For GitHub Pages, if we have a first segment and it's not a known route,
-      // it's likely the basePath (repo name)
-      if (segments.length > 0) {
-        // Check if first segment looks like a repo name (not a page route)
-        // This is a heuristic, but works for most GitHub Pages deployments
-        const firstSegment = segments[0];
-        // If we're not at root and first segment exists, use it as basePath
-        if (
-          firstSegment &&
-          pathname !== "/" &&
-          pathname !== `/${firstSegment}`
-        ) {
-          basePath = `/${firstSegment}`;
-        } else if (firstSegment && pathname === `/${firstSegment}`) {
-          // We're at /repo-name/, so repo-name is the basePath
-          basePath = `/${firstSegment}`;
-        }
-      }
+    // Ensure basePath is always a string (never undefined or null)
+    // Default to empty string for root deployments (custom domains)
+    if (basePath === undefined || basePath === null) {
+      basePath = "";
     }
+  } else {
+    // Server-side: use environment variable if available
+    // For static exports, this is only used during build/SSR
+    basePath =
+      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_PATH) ||
+      "";
   }
 
   // Return path with basePath prefix
-  // If basePath is empty (root deployment), return path with leading slash
-  // If basePath exists (subdirectory deployment like /repo-name), prepend it
+  // If basePath is empty (root deployment like custom domain), return /assets/...
+  // If basePath exists (subdirectory like GitHub Pages), return /repo-name/assets/...
   return basePath ? `${basePath}/${cleanPath}` : `/${cleanPath}`;
 }

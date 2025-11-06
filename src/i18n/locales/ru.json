@@ -192,7 +192,22 @@
     "openChatRoom": "Открыть чат",
     "uploading": "Загрузка",
     "documentsUploadedSuccess": "Документы успешно загружены",
-    "launchTargetsConfiguredSuccess": "Цели запуска успешно настроены"
+    "launchTargetsConfiguredSuccess": "Цели запуска успешно настроены",
+    "launchCampaignDescription": "Запустите свою NFT-кампанию по сбору средств, управляйте документацией и взаимодействуйте с сообществом инвесторов",
+    "target1": "Цель 1: Покупка земли для плантации",
+    "target2": "Цель 2: Покупка семян и технологий",
+    "target3": "Цель 3: Установка систем орошения",
+    "target4": "Цель 4: Первый урожай",
+    "unlockedFunds": "Разблокированные средства",
+    "votes": "Голоса",
+    "recoverInvestment": "Вернуть инвестиции",
+    "yourNFTs": "Ваши NFT",
+    "recoveryAmount": "Сумма возврата",
+    "burnNFTsRecover": "Сжечь NFT и вернуть инвестиции",
+    "recoveryVotePassed": "Если голосование о возврате прошло, вы можете сжечь свои NFT, чтобы вернуть процент от инвестиций на основе оставшихся заблокированных средств.",
+    "buyGround": "Покупка земли",
+    "buySeedsTech": "Покупка семян и технологий",
+    "irrigationSystems": "Системы орошения"
   },
   "companyDetail": {
     "backToPortfolio": "Вернуться к портфелю",

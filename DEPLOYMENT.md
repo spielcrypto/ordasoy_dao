@@ -1,106 +1,102 @@
-# Deployment Guide - GitHub Pages
+# Deployment Guide
 
-This guide explains how to deploy the Ordasoy DAO Next.js application to GitHub Pages.
+This guide explains how to build and deploy the Ordasoy DAO application for different environments.
 
-## Prerequisites
+## Build Configurations
 
-1. A GitHub repository
-2. GitHub Pages enabled in repository settings
-3. The repository must be public (or you need GitHub Pro/Team for private repos)
+The application supports two deployment scenarios:
 
-## Setup Instructions
-
-### 1. Enable GitHub Pages
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under **Source**, select **GitHub Actions**
-4. Save the settings
-
-### 2. Configure Base Path (if needed)
-
-If your repository is **not** at the root (e.g., `username.github.io/repo-name`), you need to configure the base path:
-
-1. Open `next.config.js`
-2. Uncomment and set the `basePath` and `assetPrefix`:
-   ```javascript
-   basePath: '/repo-name',
-   assetPrefix: '/repo-name',
-   ```
-   Replace `repo-name` with your actual repository name.
-
-### 3. Push to Main Branch
-
-The workflow will automatically trigger when you push to the `main` or `master` branch:
+### 1. Custom Domain (Root Deployment)
+For deployments on custom domains like `ordasoy.spielcrypto.com`:
 
 ```bash
-git add .
-git commit -m "Setup GitHub Pages deployment"
-git push origin main
+# Build without GITHUB_PAGES environment variable
+pnpm build
+# or
+npm run build
 ```
 
-### 4. Monitor Deployment
+This will:
+- Set `basePath` to empty string (`""`)
+- Generate paths like `/_next/static/...` and `/assets/...`
+- Work correctly on custom domains served from root
 
-1. Go to the **Actions** tab in your GitHub repository
-2. You should see the "Deploy to GitHub Pages" workflow running
-3. Once complete, your site will be available at:
-   - `https://username.github.io/repo-name` (if not root)
-   - `https://username.github.io` (if repository is `username.github.io`)
+### 2. GitHub Pages (Subdirectory Deployment)
+For deployments on GitHub Pages with subdirectory like `username.github.io/repo-name`:
 
-## Workflow Details
+```bash
+# Build with GITHUB_PAGES environment variable
+GITHUB_PAGES=true GITHUB_REPOSITORY="username/ordasoy-dao" pnpm build
+# or
+GITHUB_PAGES=true GITHUB_REPOSITORY="username/ordasoy-dao" npm run build
+```
 
-The GitHub Actions workflow (`.github/workflows/deploy.yml`) does the following:
+This will:
+- Set `basePath` to `"/ordasoy-dao"` (or the repo name)
+- Generate paths like `/ordasoy-dao/_next/static/...` and `/ordasoy-dao/assets/...`
+- Work correctly on GitHub Pages subdirectory deployments
 
-1. **Checkout** the repository code
-2. **Setup Node.js** and pnpm
-3. **Install dependencies** using pnpm
-4. **Run linter** (non-blocking)
-5. **Build** the Next.js application as a static site
-6. **Deploy** to GitHub Pages
+## Automatic Detection
 
-## Manual Deployment
+The application includes automatic `basePath` detection at runtime using the `getAssetPath()` function. This function:
 
-You can also trigger the workflow manually:
+1. Detects the `basePath` from Next.js script tags in the HTML
+2. Works regardless of build configuration
+3. Ensures assets load correctly in both deployment scenarios
 
-1. Go to **Actions** tab
-2. Select **Deploy to GitHub Pages** workflow
-3. Click **Run workflow**
-4. Select the branch and click **Run workflow**
+However, for optimal performance, it's recommended to build with the correct configuration for your deployment target.
+
+## Deployment Steps
+
+### For Custom Domain
+
+1. Build the application:
+   ```bash
+   pnpm build
+   ```
+
+2. Deploy the `out/` directory to your web server
+   - The `out/` directory contains all static files
+   - Serve from the root of your domain
+
+3. Ensure your web server is configured to:
+   - Serve `index.html` for all routes (SPA routing)
+   - Set proper cache headers for static assets
+
+### For GitHub Pages
+
+1. Build the application:
+   ```bash
+   GITHUB_PAGES=true GITHUB_REPOSITORY="username/ordasoy-dao" pnpm build
+   ```
+
+2. Deploy using GitHub Actions (see `.github/workflows/deploy.yml`)
+   - The workflow automatically sets the correct environment variables
+   - Or manually push the `out/` directory to the `gh-pages` branch
 
 ## Troubleshooting
 
-### Build Fails
+### Images or JavaScript not loading
 
-- Check the Actions logs for specific errors
-- Ensure all dependencies are properly listed in `package.json`
-- Verify that `next.config.js` has `output: 'export'` set
+If images or JavaScript files are not loading:
 
-### 404 Errors
+1. **Check the build configuration**: Ensure you built with the correct environment variables for your deployment target
 
-- If your repo is not at the root, make sure `basePath` is configured correctly
-- Clear browser cache and try again
-- Check that the build completed successfully
+2. **Verify the HTML**: Check the generated HTML in `out/index.html`:
+   - For custom domain: Scripts should be `/_next/static/...`
+   - For GitHub Pages: Scripts should be `/repo-name/_next/static/...`
 
-### Images Not Loading
+3. **Check browser console**: Look for 404 errors on asset files
 
-- Ensure `images.unoptimized: true` is set in `next.config.js`
-- Verify image paths are correct
-- Check that images are in the `public` folder
+4. **Rebuild**: If the build was made with incorrect settings, rebuild with the correct configuration:
+   ```bash
+   # For custom domain
+   pnpm build
+   
+   # For GitHub Pages
+   GITHUB_PAGES=true GITHUB_REPOSITORY="username/ordasoy-dao" pnpm build
+   ```
 
-## Local Testing
+### Runtime Detection
 
-To test the static export locally before deploying:
-
-```bash
-pnpm build
-npx serve out
-```
-
-Then visit `http://localhost:3000` (or the port shown by serve).
-
-## Notes
-
-- The site is built as a static export, so server-side features won't work
-- API routes are not supported in static exports
-- Dynamic routes need to be pre-rendered at build time
-
+The `getAssetPath()` function automatically detects the `basePath` at runtime, so even if the build was made with incorrect settings, it should still work. However, for best performance and to avoid any issues, always build with the correct configuration for your deployment target.
