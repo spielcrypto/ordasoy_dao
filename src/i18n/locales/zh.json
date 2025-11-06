@@ -9,7 +9,8 @@
     "submit": "提交",
     "search": "搜索",
     "send": "发送",
-    "close": "关闭"
+    "close": "关闭",
+    "files": "文件"
   },
   "header": {
     "home": "首页",
@@ -47,7 +48,8 @@
     "roleChanged": "角色已更改为",
     "connectedAs": "已连接为",
     "pleaseSelectRole": "请先选择角色",
-    "pleaseConnectWallet": "请先连接钱包"
+    "pleaseConnectWallet": "请先连接钱包",
+    "disconnectWallet": "断开钱包"
   },
   "investor": {
     "dashboard": "投资者仪表板",
@@ -157,7 +159,10 @@
     "verifiedProvider": "已验证提供商",
     "rating": "评级",
     "investorChat": "投资者聊天",
-    "openChatRoom": "打开聊天室"
+    "openChatRoom": "打开聊天室",
+    "uploading": "上传中",
+    "documentsUploadedSuccess": "文件上传成功",
+    "launchTargetsConfiguredSuccess": "启动目标配置成功"
   },
   "companyDetail": {
     "backToPortfolio": "返回投资组合",

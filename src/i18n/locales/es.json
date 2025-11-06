@@ -9,7 +9,8 @@
     "submit": "Enviar",
     "search": "Buscar",
     "send": "Enviar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "files": "archivos"
   },
   "header": {
     "home": "Inicio",
@@ -47,7 +48,8 @@
     "roleChanged": "Rol cambiado a",
     "connectedAs": "Conectado como",
     "pleaseSelectRole": "Por favor seleccione un rol primero",
-    "pleaseConnectWallet": "Por favor conecte su billetera primero"
+    "pleaseConnectWallet": "Por favor conecte su billetera primero",
+    "disconnectWallet": "Desconectar billetera"
   },
   "investor": {
     "dashboard": "Panel de inversor",
@@ -157,7 +159,10 @@
     "verifiedProvider": "Proveedor verificado",
     "rating": "calificación",
     "investorChat": "Chat de inversores",
-    "openChatRoom": "Abrir sala de chat"
+    "openChatRoom": "Abrir sala de chat",
+    "uploading": "Subiendo",
+    "documentsUploadedSuccess": "Documentos subidos exitosamente",
+    "launchTargetsConfiguredSuccess": "Objetivos de lanzamiento configurados exitosamente"
   },
   "companyDetail": {
     "backToPortfolio": "Volver a la cartera",

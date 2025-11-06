@@ -9,7 +9,8 @@
     "submit": "Жіберу",
     "search": "Іздеу",
     "send": "Жіберу",
-    "close": "Жабу"
+    "close": "Жабу",
+    "files": "файлдар"
   },
   "header": {
     "home": "Басты",
@@ -47,7 +48,8 @@
     "roleChanged": "Рөл өзгертілді",
     "connectedAs": "Қосылды",
     "pleaseSelectRole": "Алдымен рөлді таңдаңыз",
-    "pleaseConnectWallet": "Алдымен әмияныңызды қосыңыз"
+    "pleaseConnectWallet": "Алдымен әмияныңызды қосыңыз",
+    "disconnectWallet": "Әмиянды ажырату"
   },
   "investor": {
     "dashboard": "Инвестор панелі",
@@ -157,7 +159,10 @@
     "verifiedProvider": "Тексерілген жеткізуші",
     "rating": "рейтинг",
     "investorChat": "Инвесторлар чаты",
-    "openChatRoom": "Чат бөлмесін ашу"
+    "openChatRoom": "Чат бөлмесін ашу",
+    "uploading": "Жүктелуде",
+    "documentsUploadedSuccess": "Құжаттар сәтті жүктелді",
+    "launchTargetsConfiguredSuccess": "Іске қосу мақсаттары сәтті бапталды"
   },
   "companyDetail": {
     "backToPortfolio": "Портфельге оралу",

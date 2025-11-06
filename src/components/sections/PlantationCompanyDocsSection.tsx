@@ -10,10 +10,12 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Upload, Target } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { useWallet } from "@/hooks/useWallet";
 import { getAssetPath } from "@/lib/utils";
 
 export default function PlantationCompanyDocsSection() {
+  const { t } = useTranslation();
   const {
     isConnected,
     setCompanyDocumentsSubmitted,
@@ -23,7 +25,7 @@ export default function PlantationCompanyDocsSection() {
 
   const handleDocumentUpload = () => {
     if (!isConnected) {
-      toast.error("Please connect your wallet first");
+      toast.error(t("wallet.pleaseConnectWallet"));
       return;
     }
 
@@ -35,7 +37,7 @@ export default function PlantationCompanyDocsSection() {
       if (progress >= 100) {
         clearInterval(interval);
         setCompanyDocumentsSubmitted(true);
-        toast.success("Documents uploaded successfully");
+        toast.success(t("company.documentsUploadedSuccess"));
         setTimeout(() => setUploadProgress(0), 2000);
       }
     }, 200);
@@ -43,12 +45,12 @@ export default function PlantationCompanyDocsSection() {
 
   const handleConfigureLaunch = () => {
     if (!isConnected) {
-      toast.error("Please connect your wallet first");
+      toast.error(t("wallet.pleaseConnectWallet"));
       return;
     }
 
     setCompanyTargetsConfigured(true);
-    toast.success("Launch targets configured successfully");
+    toast.success(t("company.launchTargetsConfiguredSuccess"));
   };
 
   return (
@@ -56,10 +58,10 @@ export default function PlantationCompanyDocsSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Plantation Company Portal
+            {t("company.portal")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Submit your documents and configure your NFT launch targets
+            {t("company.portalDescription")}
           </p>
         </div>
 
@@ -69,26 +71,26 @@ export default function PlantationCompanyDocsSection() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Upload className="h-5 w-5" />
-                Upload Documents
+                {t("company.uploadDocuments")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="doc-type">Document Type</Label>
+                <Label htmlFor="doc-type">{t("company.documentType")}</Label>
                 <Input
                   id="doc-type"
                   placeholder="e.g., Business Plan, Financial Report"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="doc-file">File Upload</Label>
+                <Label htmlFor="doc-file">{t("company.fileUpload")}</Label>
                 <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer">
                   <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                   <p className="text-sm text-muted-foreground">
-                    Click to upload or drag and drop
+                    {t("company.clickToUpload")}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    PDF, DOC, DOCX up to 10MB
+                    {t("company.fileTypes")}
                   </p>
                 </div>
               </div>
@@ -96,12 +98,12 @@ export default function PlantationCompanyDocsSection() {
                 <div className="space-y-2">
                   <Progress value={uploadProgress} />
                   <p className="text-sm text-muted-foreground text-center">
-                    Uploading... {uploadProgress}%
+                    {t("company.uploading")} {uploadProgress}%
                   </p>
                 </div>
               )}
               <Button onClick={handleDocumentUpload} className="w-full">
-                Submit Document
+                {t("company.submitDocument")}
               </Button>
             </CardContent>
           </Card>
@@ -109,27 +111,27 @@ export default function PlantationCompanyDocsSection() {
           {/* Document Preview */}
           <Card>
             <CardHeader>
-              <CardTitle>Document Preview</CardTitle>
+              <CardTitle>{t("company.documentPreview")}</CardTitle>
             </CardHeader>
             <CardContent>
               <img
                 src={getAssetPath("assets/document-upload.dim_600x300.png")}
-                alt="Document Upload"
+                alt={t("company.documentPreview")}
                 className="w-full rounded-lg"
               />
               <div className="mt-4 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">
-                    Uploaded Documents
+                    {t("company.uploadedDocuments")}
                   </span>
-                  <span className="font-medium">12 files</span>
+                  <span className="font-medium">12 {t("common.files")}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">
-                    Verification Status
+                    {t("company.verificationStatus")}
                   </span>
                   <Badge variant="outline" className="text-green-500">
-                    Verified
+                    {t("company.verified")}
                   </Badge>
                 </div>
               </div>
@@ -142,13 +144,13 @@ export default function PlantationCompanyDocsSection() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="h-5 w-5" />
-              Set NFT Launch Targets
+              {t("company.setLaunchTargets")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="target-amount">Funding Target (KZTE)</Label>
+                <Label htmlFor="target-amount">{t("company.fundingTarget")}</Label>
                 <Input
                   id="target-amount"
                   type="number"
@@ -156,28 +158,28 @@ export default function PlantationCompanyDocsSection() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="nft-supply">Total NFT Supply</Label>
+                <Label htmlFor="nft-supply">{t("company.totalNFTSupply")}</Label>
                 <Input id="nft-supply" type="number" placeholder="1000" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="nft-price">NFT Price (KZTE)</Label>
+                <Label htmlFor="nft-price">{t("company.nftPrice")}</Label>
                 <Input id="nft-price" type="number" placeholder="10000" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="launch-date">Launch Date</Label>
+                <Label htmlFor="launch-date">{t("company.launchDate")}</Label>
                 <Input id="launch-date" type="date" />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="project-desc">Project Description</Label>
+              <Label htmlFor="project-desc">{t("company.projectDescription")}</Label>
               <Textarea
                 id="project-desc"
-                placeholder="Describe your plantation project, goals, and expected returns..."
+                placeholder={t("company.describeProject")}
                 rows={4}
               />
             </div>
             <Button className="w-full" onClick={handleConfigureLaunch}>
-              Configure Launch
+              {t("company.configureLaunch")}
             </Button>
           </CardContent>
         </Card>

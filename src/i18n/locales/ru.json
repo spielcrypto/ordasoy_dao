@@ -9,7 +9,8 @@
     "submit": "Отправить",
     "search": "Поиск",
     "send": "Отправить",
-    "close": "Закрыть"
+    "close": "Закрыть",
+    "files": "файлов"
   },
   "header": {
     "home": "Главная",
@@ -47,7 +48,8 @@
     "roleChanged": "Роль изменена на",
     "connectedAs": "Подключен как",
     "pleaseSelectRole": "Пожалуйста, сначала выберите роль",
-    "pleaseConnectWallet": "Пожалуйста, сначала подключите кошелек"
+    "pleaseConnectWallet": "Пожалуйста, сначала подключите кошелек",
+    "disconnectWallet": "Отключить кошелек"
   },
   "investor": {
     "dashboard": "Панель инвестора",
@@ -157,7 +159,10 @@
     "verifiedProvider": "Проверенный поставщик",
     "rating": "рейтинг",
     "investorChat": "Чат инвесторов",
-    "openChatRoom": "Открыть чат"
+    "openChatRoom": "Открыть чат",
+    "uploading": "Загрузка",
+    "documentsUploadedSuccess": "Документы успешно загружены",
+    "launchTargetsConfiguredSuccess": "Цели запуска успешно настроены"
   },
   "companyDetail": {
     "backToPortfolio": "Вернуться к портфелю",

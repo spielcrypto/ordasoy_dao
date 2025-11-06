@@ -9,7 +9,8 @@
     "submit": "Submit",
     "search": "Search",
     "send": "Send",
-    "close": "Close"
+    "close": "Close",
+    "files": "files"
   },
   "header": {
     "home": "Home",
@@ -47,7 +48,8 @@
     "roleChanged": "Role changed to",
     "connectedAs": "Connected as",
     "pleaseSelectRole": "Please select a role first",
-    "pleaseConnectWallet": "Please connect your wallet first"
+    "pleaseConnectWallet": "Please connect your wallet first",
+    "disconnectWallet": "Disconnect Wallet"
   },
   "investor": {
     "dashboard": "Investor Dashboard",
@@ -157,7 +159,10 @@
     "verifiedProvider": "Verified provider",
     "rating": "rating",
     "investorChat": "Investor Chat",
-    "openChatRoom": "Open Chat Room"
+    "openChatRoom": "Open Chat Room",
+    "uploading": "Uploading",
+    "documentsUploadedSuccess": "Documents uploaded successfully",
+    "launchTargetsConfiguredSuccess": "Launch targets configured successfully"
   },
   "companyDetail": {
     "backToPortfolio": "Back to Portfolio",

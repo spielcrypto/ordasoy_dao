@@ -19,16 +19,18 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { useWallet } from "@/hooks/useWallet";
 import { getAssetPath } from "@/lib/utils";
 
 export default function PlantationSection() {
+  const { t } = useTranslation();
   const { isConnected } = useWallet();
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleDocumentUpload = () => {
     if (!isConnected) {
-      toast.error("Please connect your wallet first");
+      toast.error(t("wallet.pleaseConnectWallet"));
       return;
     }
 
@@ -39,7 +41,7 @@ export default function PlantationSection() {
       setUploadProgress(progress);
       if (progress >= 100) {
         clearInterval(interval);
-        toast.success("Documents uploaded successfully");
+        toast.success(t("company.documentsUploadedSuccess"));
         setTimeout(() => setUploadProgress(0), 2000);
       }
     }, 200);
