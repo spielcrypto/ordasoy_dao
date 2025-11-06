@@ -2,6 +2,8 @@
   "name": "ordasoy-dao-frontend",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
+  "author": "Товарищество с ограниченной ответственностью Spielcrypto (Шпилькрипто)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
