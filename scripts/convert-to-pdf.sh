@@ -88,17 +88,21 @@ convert_to_pdf() {
     fi
     
     # Add language-specific settings
+    local toc_title="Contents"
     case "$language" in
         ru)
             pandoc_cmd="$pandoc_cmd -V lang=russian"
+            toc_title="Содержание"
             ;;
         kk)
             pandoc_cmd="$pandoc_cmd -V lang=kazakh"
+            toc_title="Мазмұн"
             ;;
         *)
             pandoc_cmd="$pandoc_cmd -V lang=english"
             ;;
     esac
+    pandoc_cmd="$pandoc_cmd -V toc-title=\"$toc_title\""
     
     # For XeLaTeX, add fonts that support Cyrillic
     if [ "$pdf_engine" = "xelatex" ]; then
