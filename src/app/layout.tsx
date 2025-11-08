@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Ordasoy DAO - Frontend Prototype",
   description:
     "A decentralized platform connecting plantation companies with investors through NFT-based investment opportunities",
+  icons: {
+    icon: "/assets/favicon.ico",
+  },
 };
 
 export default function RootLayout({
